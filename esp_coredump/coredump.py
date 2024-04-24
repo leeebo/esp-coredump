@@ -412,6 +412,7 @@ class CoreDump:
             print('Crashed task is not in the interrupt context')
 
     def print_current_thread_stack(self, task_info):  # type: (Optional[list[Container]]) -> None
+        print(self.gdb_esp.run_cmd('set print elements 0'))
         print(self.gdb_esp.run_cmd('bt'))
         if task_info and task_info[0].task_flags != TASK_STATUS_CORRECT:
             print('The current crashed task is corrupted.')
